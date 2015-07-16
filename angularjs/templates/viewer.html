@@ -1,0 +1,139 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    SHEDS
+    <small>Viewer</small>
+  </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    
+    <div class='col-sm-8'>
+      <div class='row'>
+        <div class='col-sm-12'>
+          <locations-map 
+          locations='filteredLocationList' 
+          filter='regionQuery' 
+          selected='selectedLocation' 
+          layers='layers'
+          selected-area='selectedArea'
+          loading='mapLoading'></locations-map>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-sm-12'>
+
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li ng-class='{false: "active", true: ""}[viewMode]'><a data-toggle="tab" ng-click='viewMode = false;'>Data</a></li>
+               <li ng-class='{true: "active", false: ""}[viewMode]'><a data-toggle="tab" ng-click='viewMode = true;'>View</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane" ng-class='{false: "active", true: ""}[viewMode]' id="tab_1">
+                <p> 
+                  <div class="btn-group" role="group" style='margin-bottom: 5px;float: right;'>
+                        <div class='btn btn-warning' ng-click='emptyCart()'>
+                          Reset Cart
+                        </div>
+                        <div class='btn btn-primary' ng-disabled='downloadData.length == 0' ng-click='addToCart()'>
+                          <i class="fa fa-cart-plus" > </i> Add to cart
+                        </div>
+                  </div>
+                    <list-data data='filteredLocationList' 
+                    selected-data='downloadData' 
+                    selected='selectedLocation'></list-data>
+                </p>
+              </div>
+               <div class="tab-pane" ng-class='{true: "active", false: ""}[viewMode]' id="tab_2">
+                <p>
+                <view-location location="selectedLocation"></view-location>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-sm-4' style='width:350px'>
+      <!-- <location-filter></location-filter> -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title">Region</h3>
+          <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <region-filter 
+            region-query="regionQuery" 
+            geo-data="layers"
+            selected-area="selectedArea" 
+            ></region-filter>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title">Agency</h3>
+          <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <agency-filter 
+            agency-query="agencyQuery"
+            agency-list="agencyList"
+            ></agency-filter>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+      <div class="box box-defaultx">
+        <div class="box-header with-border">
+          <h3 class="box-title">Timespan</h3>
+          <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <timespan-filter timespan-query="timespanQuery"></timespan-filter>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title">Download</h3>
+          <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+          <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <p> 
+            <div>
+              <div class='row'>
+                <div class="col-sm-12" style="text-align:center;">
+                  <button type="submit" class="btn btn-success" ui-sref="cart">Download</button>
+                </div>
+              </div>
+            </div>
+          </p>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+  <!-- ./col -->
+</section>
+<!-- /.content -->
